@@ -9,7 +9,9 @@ This project is using C# and .NET Core framework with CLI tools.
 ### Prerequisites
 
 [Windows Prerequisites](https://docs.microsoft.com/en-us/dotnet/core/windows-prerequisites?tabs=netcore21)
+
 [macOS Prerequisites](https://docs.microsoft.com/en-us/dotnet/core/macos-prerequisites?tabs=netcore2x)
+
 [Linux Prerequisites](https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x)
 
 To check whether the dotnet CLI is installed on your machine, run :
