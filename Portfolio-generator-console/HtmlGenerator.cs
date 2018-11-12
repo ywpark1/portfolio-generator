@@ -15,84 +15,63 @@ namespace Portfolio_generator_console {
 
             foreach (string s in files) {
                 dir = new DirectoryInfo (s);
-                System.Console.Write (dir.Name + " ");
+                Console.Write (dir.Name + " ");
             }
 
-            System.Console.WriteLine ();
+            Console.WriteLine ();
 
             // Prompt the user to enter the template name
-            // Console.Write ("Please enter the template you want to use : ");
-            // var templateName = Console.ReadLine ();
-            var templateName = "template1";
+            Console.Write ("Please enter the template you want to use : ");
+            var templateName = Console.ReadLine ();
+            // var templateName = "template1";
 
             var selectedTemplatePath = Path.Combine (templateDir, templateName);
 
-            // System.Console.WriteLine (targetDir);
-
             try {
+                Console.WriteLine ("\nYou selected '" + templateName + "'.");
                 CopyFiles (selectedTemplatePath, targetDir);
             } catch (Exception ex) {
-
-                System.Console.WriteLine (ex.Message);
+                throw ex;
             }
-
-            // string[] tempFiles = Directory.GetFiles (sourcePath);
-            // string[] tempDirs = Directory.GetDirectories (sourcePath);
-
-            // // System.Console.WriteLine (tempDirs[0]);
-
-            // string fileName = string.Empty;
-            // string destFile = string.Empty;
-
-            // foreach (string s in tempFiles) {
-            //     // Use static Path methods to extract only the file name from the path.
-            //     fileName = Path.GetFileName (s);
-            //     destFile = Path.Combine (targetDir, fileName);
-            //     File.Copy (s, destFile, true);
-
-            //     System.Console.WriteLine (fileName);
-            // }
-
-            // try {
-            //     // Copy the files and overwrite destination files if they already exist.
-            //     foreach (string s in files) {
-            //         // Use static Path methods to extract only the file name from the path.
-            //         fileName = Path.GetFileName (s);
-            //         // destFile = Path.Combine (targetDir, fileName);
-            //         // File.Copy (s, destFile, true);
-
-            //         System.Console.WriteLine (fileName);
-            //     }
-            // } catch (System.Exception e) {
-            //     System.Console.WriteLine (e.Message);
-            // }
-
-            // System.Console.WriteLine ("Source path Exists!!");
 
         }
 
-        // public static void DeleteAllFiles (string path) {
-        //     if (Directory.Exists (path)) {
-        //         //Delete all files from the Directory
-        //         foreach (string file in Directory.GetFiles (path)) {
-        //             File.Delete (file);
-        //         }
-        //         //Delete all child Directories
-        //         foreach (string directory in Directory.GetDirectories (path)) {
-        //             DeleteAllFiles (directory);
-        //         }
-        //         //Delete a Directory
-        //         Directory.Delete (path);
-        //     } else {
-        //         Directory.CreateDirectory (path);
-        //     }
-        // }
+        /// <summary>
+        /// Delete all files and directories if exists.
+        /// </summary>
+        /// <param name="path">Directory path for delete</param>
+        public static void DeleteFiles (string path) {
+            if (Directory.Exists (path)) {
 
+                //Delete all files in the Directory
+                foreach (string file in Directory.GetFiles (path)) {
+                    File.Delete (file);
+                }
+
+                //Delete all child Directories
+                foreach (string directory in Directory.GetDirectories (path)) {
+                    DeleteFiles (directory);
+                }
+
+                //Delete a Directory
+                Directory.Delete (path);
+            }
+        }
+
+        /// <summary>
+        /// Copy files if source path files exist; raise the exception if not.
+        /// </summary>
+        /// <param name="src">Source path of the directory</param>
+        /// <param name="dest">Destination path of the directory</param>
         public static void CopyFiles (string src, string dest) {
 
             if (Directory.Exists (src)) {
 
-                // DeleteAllFiles (dest);
+                DeleteFiles (dest);
+
+                if (!Directory.Exists (dest)) {
+                    Directory.CreateDirectory (dest);
+                }
 
                 string[] tempFiles = Directory.GetFiles (src);
                 string[] tempDirs = Directory.GetDirectories (src);
@@ -101,18 +80,14 @@ namespace Portfolio_generator_console {
                 DirectoryInfo dirName = null;
                 string destFile = string.Empty;
 
-                // System.Console.WriteLine ();
-
                 // Copy all files to destination
                 foreach (string f in tempFiles) {
                     fileName = Path.GetFileName (f);
                     destFile = Path.Combine (dest, fileName);
                     File.Copy (f, destFile, true);
-
-                    // System.Console.WriteLine (fileName + " is copied to " + dest);
                 }
-                // System.Console.WriteLine ();
 
+                // Copy all directories to destination
                 foreach (string d in tempDirs) {
                     dirName = new DirectoryInfo (d);
 
@@ -121,47 +96,40 @@ namespace Portfolio_generator_console {
 
                     Directory.CreateDirectory (destDirPath);
                     CopyFiles (srcDirPath, destDirPath);
-
-                    // if (Directory.Exists (destDirPath)) Directory.Delete (destDirPath);
-
-                    // Directory.CreateDirectory (destDirPath);
-
-                    // if (!Directory.Exists (destDirPath)) throw new Exception ("Could not create the directory");
-
-                    // // Copy the files under the sub-directory recursively
-                    // CopyFiles (srcDirPath, destDirPath);
                 }
             } else {
                 throw new Exception ("Source path does not exist!");
             }
         }
 
+        /// <summary>
+        /// Generate HTML file
+        /// </summary>
         public static void GenerateHtml () {
 
-            // string templatePath = Path.Combine (Directory.GetParent (".").ToString (), "template1", "index.html");
-            string templatePath = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "templates", "template1", "index.html");
+            try {
+                SelectTemplate ();
 
-            // string newFilePath = Path.Combine (Directory.GetParent (".").ToString (), "portfolio", "index.html");
-            string newFilePath = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "portfolio", "index.html");
+                string templatePath = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "templates", "template1", "index.html");
+                string newFilePath = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "portfolio", "index.html");
 
-            // System.Console.WriteLine (templatePath);
+                // Read HTML from file
+                var content = File.ReadAllText (templatePath);
 
-            // Read HTML from file
-            var content = File.ReadAllText (templatePath);
+                Console.WriteLine ();
+                Console.Write ("Please enter your name : ");
+                var yourName = Console.ReadLine ();
 
-            Console.Write ("Please enter your name : ");
-            var yourName = Console.ReadLine ();
+                //Replace all values in the HTML
+                content = content.Replace ("{YOUR_NAME}", yourName);
 
-            //Replace all values in the HTML
-            content = content.Replace ("{YOUR_NAME}", yourName);
+                //Write new HTML string to file
+                File.WriteAllText (newFilePath, content);
 
-            //Write new HTML string to file
-            File.WriteAllText (newFilePath, content);
-
-            Console.WriteLine ("\nNew Portfolio html file is successfully generated at : " + newFilePath);
-
-            // System.Diagnostics.Process.Start ("cmd", newFilePath);
-
+                Console.WriteLine ("\nNew Portfolio html file is successfully generated at : " + newFilePath);
+            } catch (Exception e) {
+                Console.WriteLine (e.Message);
+            }
         }
     }
 }
