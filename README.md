@@ -36,6 +36,29 @@ Currently, 'name' can be changed in the template.
 
 **NOTE** : It is continuously updating.
 
+### Upload to Repository([USER_NAME.github.io])
+
+1. Create new repository with the name 'USER_NAME.github.io'. (\*)
+
+2. Copy the repository URL(ex. https://github.com/USER_NAME/USER_NAME.github.io.git). (\*)
+
+3. In the Command Line, move to the root directory of this project(portfolio-generator).
+
+4. Run the following commands :
+
+```bash
+./portfolio-uploader.sh
+```
+
+5. Enter the repository URL you copied.
+
+6. Enter the github username and password to upload files to repository.
+   ⋅⋅\* If it displays an error, check your repository URL.
+
+(\*) : Replace the USER_NAME with your github account username.
+
+**NOTE** : It is working with empty repository only.
+
 ### Template Fields
 
 - {YOUR_NAME}
