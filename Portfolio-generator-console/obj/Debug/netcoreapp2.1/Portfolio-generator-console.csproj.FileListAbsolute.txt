@@ -1,0 +1,11 @@
+/Users/xiaochen/Downloads/portfolio-generator/Portfolio-generator-console/bin/Debug/netcoreapp2.1/Portfolio-generator-console.deps.json
+/Users/xiaochen/Downloads/portfolio-generator/Portfolio-generator-console/bin/Debug/netcoreapp2.1/Portfolio-generator-console.runtimeconfig.json
+/Users/xiaochen/Downloads/portfolio-generator/Portfolio-generator-console/bin/Debug/netcoreapp2.1/Portfolio-generator-console.runtimeconfig.dev.json
+/Users/xiaochen/Downloads/portfolio-generator/Portfolio-generator-console/bin/Debug/netcoreapp2.1/Portfolio-generator-console.dll
+/Users/xiaochen/Downloads/portfolio-generator/Portfolio-generator-console/bin/Debug/netcoreapp2.1/Portfolio-generator-console.pdb
+/Users/xiaochen/Downloads/portfolio-generator/Portfolio-generator-console/obj/Debug/netcoreapp2.1/Portfolio-generator-console.csproj.CoreCompileInputs.cache
+/Users/xiaochen/Downloads/portfolio-generator/Portfolio-generator-console/obj/Debug/netcoreapp2.1/Portfolio-generator-console.AssemblyInfoInputs.cache
+/Users/xiaochen/Downloads/portfolio-generator/Portfolio-generator-console/obj/Debug/netcoreapp2.1/Portfolio-generator-console.AssemblyInfo.cs
+/Users/xiaochen/Downloads/portfolio-generator/Portfolio-generator-console/obj/Debug/netcoreapp2.1/Portfolio-generator-console.dll
+/Users/xiaochen/Downloads/portfolio-generator/Portfolio-generator-console/obj/Debug/netcoreapp2.1/Portfolio-generator-console.pdb
+/Users/xiaochen/Downloads/portfolio-generator/Portfolio-generator-console/obj/Debug/netcoreapp2.1/Portfolio-generator-console.csprojAssemblyReference.cache

@@ -11,39 +11,6 @@ using YamlDotNet.RepresentationModel;
 namespace Portfolio_generator_console {
 
     public class HtmlGenerator {
-    private const string Document = @"---
-            receipt:    Oz-Ware Purchase Invoice
-            date:        2007-08-06
-            customer:
-                given:   Dorothy
-                family:  Gale
-
-            items:
-                - part_no:   A4786
-                  descrip:   Water Bucket (Filled)
-                  price:     1.47
-                  quantity:  4
-
-                - part_no:   E1628
-                  descrip:   High Heeled ""Ruby"" Slippers
-                  price:     100.27
-                  quantity:  1
-
-            bill-to:  &id001
-                street: |
-                        123 Tornado Alley
-                        Suite 16
-                city:   East Westville
-                state:  KS
-
-            ship-to:  *id001
-
-            specialDelivery:  >
-                Follow the Yellow Brick
-                Road to the Emerald City.
-                Pay no attention to the
-                man behind the curtain.
-...";
         public static string templateDir = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "templates");
         public static string targetDir = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "portfolio");
 
@@ -153,6 +120,7 @@ namespace Portfolio_generator_console {
 
                 string templatePath = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "templates", "template1", "index.html");
                 string newFilePath = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "portfolio", "index.html");
+                string _filePath = Directory.GetCurrentDirectory() + @"data.yaml";
 
                 // Read HTML from file
                 var content = File.ReadAllText (templatePath);
@@ -160,6 +128,7 @@ namespace Portfolio_generator_console {
                 Console.WriteLine ();
                 Console.Write ("Please enter your name : ");
                 var yourName = Console.ReadLine ();
+
                 //// Setup the input
                 var input = new StringReader(Document);
 
@@ -184,9 +153,11 @@ namespace Portfolio_generator_console {
 				    );
 			    }
 
+
+
                 //Replace all values in the HTML
                 content = content.Replace ("{YOUR_NAME}", yourName);
-                content = content.Replace ("{items} ", yourName);
+                content = content.Replace ("items",item.Children[new YamlScalarNode("descrip").ToString);
 
                 //Write new HTML string to file
                 File.WriteAllText (newFilePath, content);
