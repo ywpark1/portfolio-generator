@@ -13,3 +13,7 @@ templates/template1/assets/js/jquery.mCustomScrollbar.concat.min.js
 templates/template1/assets/js/jquery-3.2.1.slim.min.js
 templates/template1/assets/js/popper.min.js
 templates/template1/assets/js/owl.carousel.min.js
+templates/template1/assets/css/animate.css
+templates/template1/assets/css/normalize.css
+templates/template1/assets/js/masonry.pkgd.min-4.2.0.js
+templates/template1/assets/js/jquery-1.12.4.min.js
