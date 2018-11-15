@@ -11,7 +11,7 @@ namespace Portfolio_generator_console {
 
         public static string templateDir = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "templates");
         public static string targetDir = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "portfolio");
-
+        // Please filled up your personal informations down below:
         private const string Document = @"---
             Job title:    Web Developer
             date:        2018-10-15
@@ -26,7 +26,7 @@ namespace Portfolio_generator_console {
                 - language:   Java
                   descrip:   some descriptions_2
 
-            address:  &id001
+            address:
                 street: |
                         123 Tornado Alley
                         Suite 16
@@ -34,8 +34,26 @@ namespace Portfolio_generator_console {
                 state:  KS
 
             About me:
-                about meabout meabout meabout meabout meabout meabout meabout me
+                about meabout meabout meabout meabout meabout meabout meabout meabout meabout meabout me!!!
+
+            Values:
+                pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
+                Purto brute disputando cu est.
+            Goals:
+                pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
+                Purto brute disputando cu est.
+            hobbies:
+                pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
+                Purto brute disputando cu est.
+
+            Web Design:
+                - Project Name: test1
+                  descrip: some descriptions_1
+                - Project Name: test2
+                  descrip: some descriptions_2
 ...";
+
+
         public static void SelectTemplate () {
 
             // Display the available templates under 'templates' directory
@@ -168,8 +186,15 @@ namespace Portfolio_generator_console {
 			    var skills = (YamlSequenceNode)mapping.Children[new YamlScalarNode("skills")];
                 var jobTitle = (YamlScalarNode)mapping.Children[new YamlScalarNode("Job title")];
                 var aboutMe = (YamlScalarNode)mapping.Children[new YamlScalarNode("About me")];
+                var values = (YamlScalarNode)mapping.Children[new YamlScalarNode("Values")];
+                var goals = (YamlScalarNode)mapping.Children[new YamlScalarNode("Goals")];
 
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(aboutMe.ToString());
+                Console.WriteLine(values.ToString());
+                Console.WriteLine(goals.ToString());
+                Console.ResetColor();
+
 			    foreach (YamlMappingNode skill in skills){
 				    Console.WriteLine(
 					    "{0}\t{1}",
@@ -178,13 +203,11 @@ namespace Portfolio_generator_console {
 				    );
 			    }
 
-
-
                 //Replace all values in the HTML
                 content = content.Replace ("{YOUR_NAME}", yourName);
                 content = content.Replace ("{JOB_TITLE}", jobTitle.ToString());
                 content = content.Replace("{ABOUT_ME}",aboutMe.ToString());
-
+                content = content.Replace("{VALUES}",values.ToString());
 
                 //Write new HTML string to file
                 File.WriteAllText (newFilePath, content);
