@@ -13,33 +13,28 @@ namespace Portfolio_generator_console {
         public static string targetDir = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "portfolio");
 
         private const string Document = @"---
-            phoneNum:    111-111-111
-            date:        2007-08-06
-            customer:
+            Job title:    Web Developer
+            date:        2018-10-15
+            Name:
                 given:   Dorothy
                 family:  Gale
 
             skills:
                 - language:   C++
-                  descrip:   Water Bucket (Filled)
+                  descrip:   some descriptions_1
 
                 - language:   Java
-                  descrip:   High Heeled ""Ruby"" Slippers
+                  descrip:   some descriptions_2
 
-            bill-to:  &id001
+            address:  &id001
                 street: |
                         123 Tornado Alley
                         Suite 16
                 city:   East Westville
                 state:  KS
 
-            ship-to:  *id001
-
-            specialDelivery:  >
-                Follow the Yellow Brick
-                Road to the Emerald City.
-                Pay no attention to the
-                man behind the curtain.
+            About me:
+                about meabout meabout meabout meabout meabout meabout meabout me
 ...";
         public static void SelectTemplate () {
 
@@ -171,6 +166,10 @@ namespace Portfolio_generator_console {
 
 			    // List all the items
 			    var skills = (YamlSequenceNode)mapping.Children[new YamlScalarNode("skills")];
+                var jobTitle = (YamlScalarNode)mapping.Children[new YamlScalarNode("Job title")];
+                var aboutMe = (YamlScalarNode)mapping.Children[new YamlScalarNode("About me")];
+
+                Console.WriteLine(aboutMe.ToString());
 			    foreach (YamlMappingNode skill in skills){
 				    Console.WriteLine(
 					    "{0}\t{1}",
@@ -183,7 +182,8 @@ namespace Portfolio_generator_console {
 
                 //Replace all values in the HTML
                 content = content.Replace ("{YOUR_NAME}", yourName);
-                content = content.Replace ("{skill}", skills.ToString());
+                content = content.Replace ("{JOB_TITLE}", jobTitle.ToString());
+                content = content.Replace("{ABOUT_ME}",aboutMe.ToString());
 
 
                 //Write new HTML string to file
