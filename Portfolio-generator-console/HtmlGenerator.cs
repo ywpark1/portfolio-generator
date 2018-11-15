@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
-using YamlDotNet.Core;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using YamlDotNet.RepresentationModel;
 
 namespace Portfolio_generator_console {
@@ -10,27 +13,34 @@ namespace Portfolio_generator_console {
         public static string targetDir = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "portfolio");
 
         private const string Document = @"---
+            phoneNum:    111-111-111
+            date:        2007-08-06
+            customer:
+                given:   Dorothy
+                family:  Gale
 
-			 customer:
-					 given:   Dorothy
-					 family:  Gale
+            skills:
+                - language:   C++
+                  descrip:   Water Bucket (Filled)
 
-			 phoneNum:    111-111-1111
-			 date:        2007-08-06
+                - language:   Java
+                  descrip:   High Heeled ""Ruby"" Slippers
 
-			 skills:
-					 - language:   c++
-						 descrip:   Water Bucket (Filled)
-						 price:     1.47
-						 quantity:  4
+            bill-to:  &id001
+                street: |
+                        123 Tornado Alley
+                        Suite 16
+                city:   East Westville
+                state:  KS
 
-					 - language:   java
-						 descrip:   High Heeled ""Ruby"" Slippers
-						 price:     100.27
-						 quantity:  1
-            About me: Hi I'm Xiaochen Wang
-			 ";
+            ship-to:  *id001
 
+            specialDelivery:  >
+                Follow the Yellow Brick
+                Road to the Emerald City.
+                Pay no attention to the
+                man behind the curtain.
+...";
         public static void SelectTemplate () {
 
             // Display the available templates under 'templates' directory
@@ -173,7 +183,7 @@ namespace Portfolio_generator_console {
 
                 //Replace all values in the HTML
                 content = content.Replace ("{YOUR_NAME}", yourName);
-                // content = content.Replace ("{skill}", skills.ToString());
+                content = content.Replace ("{skill}", skills.ToString());
 
 
                 //Write new HTML string to file
