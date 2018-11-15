@@ -1,11 +1,33 @@
 using System;
 using System.IO;
+using YamlDotNet;
 
 namespace Portfolio_generator_console {
     public class HtmlGenerator {
 
         public static string templateDir = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "templates");
         public static string targetDir = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "portfolio");
+
+        private const string Document = @"---
+
+			 customer:
+					 given:   Dorothy
+					 family:  Gale
+
+			 phoneNum:    111-111-1111
+			 date:        2007-08-06
+
+			 skills:
+					 - language:   c++
+						 descrip:   Water Bucket (Filled)
+						 price:     1.47
+						 quantity:  4
+
+					 - language:   java
+						 descrip:   High Heeled ""Ruby"" Slippers
+						 price:     100.27
+						 quantity:  1
+			 ";
 
         public static void SelectTemplate () {
 
@@ -119,6 +141,39 @@ namespace Portfolio_generator_console {
                 Console.WriteLine ();
                 Console.Write ("Please enter your name : ");
                 var yourName = Console.ReadLine ();
+
+
+
+
+                var input = new StringReader(Document);
+
+			    // Load the stream
+			    var yaml = new YamlStream();
+			    yaml.Load(input);
+
+
+			    // Examine the stream
+			    var mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
+
+			    foreach (var entry in mapping.Children){
+				    Console.WriteLine(((YamlScalarNode)entry.Key).Value);
+			    }
+
+			    // List all the items
+			    var skills = (YamlSequenceNode)mapping.Children[new YamlScalarNode("skills")];
+			    foreach (YamlMappingNode skill in skills){
+				    Console.WriteLine(
+					    "{0}\t{1}",
+					    skill.Children[new YamlScalarNode("language")],
+					    skill.Children[new YamlScalarNode("descrip")]
+				    );
+			    }
+
+
+
+                //Replace all values in the HTML
+                content = content.Replace ("{YOUR_NAME}", yourName);
+                content = content.Replace ("{test}", skills.ToString());
 
                 //Replace all values in the HTML
                 content = content.Replace ("{YOUR_NAME}", yourName);
