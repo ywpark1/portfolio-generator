@@ -1,3 +1,15 @@
 node_modules/**
 package-lock.json
 package.json
+templates/template1/assets/css/bootstrap.min.css
+templates/template1/assets/css/font-awesome.min.css
+templates/template1/assets/css/jquery.mCustomScrollbar.css
+templates/template1/assets/css/jquery.mCustomScrollbar.css
+templates/template1/assets/css/owl.carousel.min.css
+templates/template1/assets/css/responsive.css
+templates/template1/assets/js/bootstrap.min.js
+templates/template1/assets/js/isotope.pkgd-3.0.4.min.js
+templates/template1/assets/js/jquery.mCustomScrollbar.concat.min.js
+templates/template1/assets/js/jquery-3.2.1.slim.min.js
+templates/template1/assets/js/popper.min.js
+templates/template1/assets/js/owl.carousel.min.js
