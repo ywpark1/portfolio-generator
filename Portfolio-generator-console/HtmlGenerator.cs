@@ -1,6 +1,7 @@
 using System;
 using System.IO;
-using YamlDotNet;
+using YamlDotNet.Core;
+using YamlDotNet.RepresentationModel;
 
 namespace Portfolio_generator_console {
     public class HtmlGenerator {
@@ -141,8 +142,6 @@ namespace Portfolio_generator_console {
                 Console.WriteLine ();
                 Console.Write ("Please enter your name : ");
                 var yourName = Console.ReadLine ();
-
-
 
 
                 var input = new StringReader(Document);
