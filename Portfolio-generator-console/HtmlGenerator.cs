@@ -28,6 +28,7 @@ namespace Portfolio_generator_console {
 						 descrip:   High Heeled ""Ruby"" Slippers
 						 price:     100.27
 						 quantity:  1
+            About me: Hi I'm Xiaochen Wang
 			 ";
 
         public static void SelectTemplate () {
@@ -172,10 +173,8 @@ namespace Portfolio_generator_console {
 
                 //Replace all values in the HTML
                 content = content.Replace ("{YOUR_NAME}", yourName);
-                content = content.Replace ("{test}", skills.ToString());
+                // content = content.Replace ("{skill}", skills.ToString());
 
-                //Replace all values in the HTML
-                content = content.Replace ("{YOUR_NAME}", yourName);
 
                 //Write new HTML string to file
                 File.WriteAllText (newFilePath, content);
