@@ -19,40 +19,59 @@ namespace Portfolio_generator_console {
                 given:   Dorothy
                 family:  Gale
 
-            skills:
+            Skills:
                 - language:   C++
                   descrip:   some descriptions_1
+                  level: 99
 
                 - language:   Java
                   descrip:   some descriptions_2
+                  level: 99
 
-            address:
+            Projects:
+                - Project Name: test1
+                  descrip: some descriptions_1
+                - Project Name: test2
+                  descrip: some descriptions_2
+
+            Address:
                 street: |
                         123 Tornado Alley
                         Suite 16
                 city:   East Westville
                 state:  KS
 
-            About me:
+            Aboutme:
                 about meabout meabout meabout meabout meabout meabout meabout meabout meabout meabout me!!!
-
             Values:
-                pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
+                Values pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
                 Purto brute disputando cu est.
             Goals:
-                pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
+                Goals pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
                 Purto brute disputando cu est.
-            hobbies:
-                pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
+            Hobbies:
+                hobbies pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
                 Purto brute disputando cu est.
-
-            Web Design:
-                - Project Name: test1
-                  descrip: some descriptions_1
-                - Project Name: test2
-                  descrip: some descriptions_2
+            Resume:
+                - descrip: Resume pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
+                           Purto brute disputando cu est.
+                  url: www.xiaochen.ca
+            Education:
+                - descrip: This this demo1 description
+                  time period: March 2009 - December 2011
+                  level: Major in Engineering, University B, Los Angeles, USA.
+                - descrip: This this demo2 description
+                  time period: March 2009 - December 2011
+                  level: Major in Engineering, MIT
+                - descrip: This this demo3 description
+                  time period: March 2009 - December 2011
+                  level: Major in Engineering, Seneca College.
+            
 ...";
 
+        public static string Document1 => Document;
+
+        public static string Document2 => Document;
 
         public static void SelectTemplate () {
 
@@ -168,7 +187,7 @@ namespace Portfolio_generator_console {
                 var yourName = Console.ReadLine ();
 
 
-                var input = new StringReader(Document);
+                var input = new StringReader(Document1);
 
 			    // Load the stream
 			    var yaml = new YamlStream();
@@ -183,16 +202,28 @@ namespace Portfolio_generator_console {
 			    }
 
 			    // List all the items
-			    var skills = (YamlSequenceNode)mapping.Children[new YamlScalarNode("skills")];
+			    var skills = (YamlSequenceNode)mapping.Children[new YamlScalarNode("Skills")];
                 var jobTitle = (YamlScalarNode)mapping.Children[new YamlScalarNode("Job title")];
-                var aboutMe = (YamlScalarNode)mapping.Children[new YamlScalarNode("About me")];
+                var aboutMe = (YamlScalarNode)mapping.Children[new YamlScalarNode("Aboutme")];
                 var values = (YamlScalarNode)mapping.Children[new YamlScalarNode("Values")];
                 var goals = (YamlScalarNode)mapping.Children[new YamlScalarNode("Goals")];
+                var hobbies = (YamlScalarNode)mapping.Children[new YamlScalarNode("Hobbies")];
+                // var projects = (YamlScalarNode)mapping.Children[new YamlScalarNode("Projects")];
+                // var resume = (YamlScalarNode)mapping.Children[new YamlScalarNode("Resume")];
+                var educations = (YamlScalarNode)mapping.Children[new YamlScalarNode("Education")];
 
                 Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(skills.ToString());
+                Console.WriteLine(jobTitle.ToString());
                 Console.WriteLine(aboutMe.ToString());
                 Console.WriteLine(values.ToString());
                 Console.WriteLine(goals.ToString());
+                Console.WriteLine(educations.ToString());
+                // Console.WriteLine(resume.ToString());
+                Console.WriteLine(hobbies.ToString());
+                // Console.WriteLine(projects.ToString());
+
+
                 Console.ResetColor();
 
 			    foreach (YamlMappingNode skill in skills){
@@ -203,11 +234,16 @@ namespace Portfolio_generator_console {
 				    );
 			    }
 
+
                 //Replace all values in the HTML
-                content = content.Replace ("{YOUR_NAME}", yourName);
+                content = content.Replace ("{YOUR_NAME}", yourName.ToString());
                 content = content.Replace ("{JOB_TITLE}", jobTitle.ToString());
                 content = content.Replace("{ABOUT_ME}",aboutMe.ToString());
                 content = content.Replace("{VALUES}",values.ToString());
+                content = content.Replace("{GOALS}",goals.ToString());
+                content = content.Replace("{HOBBIES}",hobbies.ToString());
+                content = content.Replace("{SKILLS}",skills.ToString());
+                content = content.Replace("{EDUCATION}",educations.ToString());
 
                 //Write new HTML string to file
                 File.WriteAllText (newFilePath, content);
