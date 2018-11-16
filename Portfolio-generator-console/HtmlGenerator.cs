@@ -66,7 +66,7 @@ namespace Portfolio_generator_console {
                 - descrip: This this demo3 description
                   time period: March 2009 - December 2011
                   level: Major in Engineering, Seneca College.
-            
+
 ...";
 
         public static string Document1 => Document;
@@ -203,36 +203,54 @@ namespace Portfolio_generator_console {
 
 			    // List all the items
 			    var skills = (YamlSequenceNode)mapping.Children[new YamlScalarNode("Skills")];
-                var jobTitle = (YamlScalarNode)mapping.Children[new YamlScalarNode("Job title")];
-                var aboutMe = (YamlScalarNode)mapping.Children[new YamlScalarNode("Aboutme")];
-                var values = (YamlScalarNode)mapping.Children[new YamlScalarNode("Values")];
-                var goals = (YamlScalarNode)mapping.Children[new YamlScalarNode("Goals")];
-                var hobbies = (YamlScalarNode)mapping.Children[new YamlScalarNode("Hobbies")];
-                // var projects = (YamlScalarNode)mapping.Children[new YamlScalarNode("Projects")];
-                // var resume = (YamlScalarNode)mapping.Children[new YamlScalarNode("Resume")];
-                var educations = (YamlScalarNode)mapping.Children[new YamlScalarNode("Education")];
+          var educations = (YamlSequenceNode)mapping.Children[new YamlScalarNode("Education")];
+          var projects = (YamlSequenceNode)mapping.Children[new YamlScalarNode("Projects")];
+          var resume = (YamlSequenceNode)mapping.Children[new YamlScalarNode("Resume")];
+          var jobTitle = (YamlScalarNode)mapping.Children[new YamlScalarNode("Job title")];
+          var aboutMe = (YamlScalarNode)mapping.Children[new YamlScalarNode("Aboutme")];
+          var values = (YamlScalarNode)mapping.Children[new YamlScalarNode("Values")];
+          var goals = (YamlScalarNode)mapping.Children[new YamlScalarNode("Goals")];
+          var hobbies = (YamlScalarNode)mapping.Children[new YamlScalarNode("Hobbies")];
 
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(skills.ToString());
-                Console.WriteLine(jobTitle.ToString());
-                Console.WriteLine(aboutMe.ToString());
-                Console.WriteLine(values.ToString());
-                Console.WriteLine(goals.ToString());
-                Console.WriteLine(educations.ToString());
-                // Console.WriteLine(resume.ToString());
-                Console.WriteLine(hobbies.ToString());
-                // Console.WriteLine(projects.ToString());
+          // var projects = (YamlScalarNode)mapping.Children[new YamlScalarNode("Projects")];
+          // var resume = (YamlScalarNode)mapping.Children[new YamlScalarNode("Resume")];
 
 
-                Console.ResetColor();
+          Console.ForegroundColor = ConsoleColor.Green;
+          Console.WriteLine(skills.ToString());
+          Console.WriteLine(Environment.NewLine);
+          Console.WriteLine(jobTitle.ToString());
+          Console.WriteLine(Environment.NewLine);
+          Console.WriteLine(aboutMe.ToString());
+          Console.WriteLine(Environment.NewLine);
+          Console.WriteLine(values.ToString());
+          Console.WriteLine(Environment.NewLine);
+          Console.WriteLine(goals.ToString());
+          Console.WriteLine(Environment.NewLine);
+          Console.WriteLine(educations.ToString());
+          Console.WriteLine(Environment.NewLine);
+          Console.WriteLine(resume.ToString());
+          Console.WriteLine(Environment.NewLine);
+          Console.WriteLine(projects.ToString());
+          Console.WriteLine(Environment.NewLine);
+          Console.WriteLine(hobbies.ToString());
+          Console.WriteLine(Environment.NewLine);
+          Console.ResetColor();
 
-			    foreach (YamlMappingNode skill in skills){
-				    Console.WriteLine(
-					    "{0}\t{1}",
-					    skill.Children[new YamlScalarNode("language")],
-					    skill.Children[new YamlScalarNode("descrip")]
-				    );
-			    }
+			    // foreach (YamlMappingNode skill in skills){
+				  //   Console.WriteLine(
+					//     "{0}\t{1}",
+					//     skill.Children[new YamlScalarNode("language")],
+					//     skill.Children[new YamlScalarNode("descrip")]
+				  //   );
+			    // }
+          // foreach (YamlMappingNode edu in educations){
+				  //   Console.WriteLine(
+					//     "{0}\t{1}",
+					//     edu.Children[new YamlScalarNode("language")],
+					//     edu.Children[new YamlScalarNode("descrip")]
+				  //   );
+			    // }
 
 
                 //Replace all values in the HTML
