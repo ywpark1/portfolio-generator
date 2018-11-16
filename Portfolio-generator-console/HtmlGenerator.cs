@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
 using YamlDotNet.RepresentationModel;
 
@@ -12,66 +13,6 @@ namespace Portfolio_generator_console {
         public static string templateDir = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "templates");
         public static string targetDir = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "portfolio");
         // Please filled up your personal informations down below:
-        private const string Document = @"---
-            Job title:    Web Developer
-            date:        2018-10-15
-            Name:
-                given:   Dorothy
-                family:  Gale
-
-            Skills:
-                - language:   C++
-                  descrip:   some descriptions_1
-                  level: 99
-
-                - language:   Java
-                  descrip:   some descriptions_2
-                  level: 99
-
-            Projects:
-                - Project Name: test1
-                  descrip: some descriptions_1
-                - Project Name: test2
-                  descrip: some descriptions_2
-
-            Address:
-                street: |
-                        123 Tornado Alley
-                        Suite 16
-                city:   East Westville
-                state:  KS
-
-            Aboutme:
-                about meabout meabout meabout meabout meabout meabout meabout meabout meabout meabout me!!!
-            Values:
-                Values pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
-                Purto brute disputando cu est.
-            Goals:
-                Goals pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
-                Purto brute disputando cu est.
-            Hobbies:
-                hobbies pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
-                Purto brute disputando cu est.
-            Resume:
-                - descrip: Resume pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
-                           Purto brute disputando cu est.
-                  url: www.xiaochen.ca
-            Education:
-                - descrip: This this demo1 description
-                  time period: March 2009 - December 2011
-                  level: Major in Engineering, University B, Los Angeles, USA.
-                - descrip: This this demo2 description
-                  time period: March 2009 - December 2011
-                  level: Major in Engineering, MIT
-                - descrip: This this demo3 description
-                  time period: March 2009 - December 2011
-                  level: Major in Engineering, Seneca College.
-
-...";
-
-        public static string Document1 => Document;
-
-        public static string Document2 => Document;
 
         public static void SelectTemplate () {
 
@@ -174,6 +115,18 @@ namespace Portfolio_generator_console {
         public static void GenerateHtml () {
 
             try {
+                string path = @"./Portfolio-generator-console/data.yml";
+
+                if (!File.Exists(path)){
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("++++++++++++++++++++++++++++++++++++++++");
+                    Console.WriteLine("Error!!! Can not find the data.yml file.");
+                    Console.WriteLine("++++++++++++++++++++++++++++++++++++++++");
+                    Console.ResetColor();
+                }
+                //  refrence: https://docs.microsoft.com/en-us/dotnet/api/system.io.file.readalltext?view=netframework-4.7.2
+
+
                 SelectTemplate ();
 
                 string templatePath = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "templates", "template1", "index.html");
@@ -186,8 +139,8 @@ namespace Portfolio_generator_console {
                 Console.Write ("Please enter your name : ");
                 var yourName = Console.ReadLine ();
 
-
-                var input = new StringReader(Document1);
+                string Document = File.ReadAllText(path);
+                var input = new StringReader(Document);
 
 			    // Load the stream
 			    var yaml = new YamlStream();
@@ -203,53 +156,53 @@ namespace Portfolio_generator_console {
 
 			    // List all the items
 			    var skills = (YamlSequenceNode)mapping.Children[new YamlScalarNode("Skills")];
-          var educations = (YamlSequenceNode)mapping.Children[new YamlScalarNode("Education")];
-          var projects = (YamlSequenceNode)mapping.Children[new YamlScalarNode("Projects")];
-          var resume = (YamlSequenceNode)mapping.Children[new YamlScalarNode("Resume")];
-          var jobTitle = (YamlScalarNode)mapping.Children[new YamlScalarNode("Job title")];
-          var aboutMe = (YamlScalarNode)mapping.Children[new YamlScalarNode("Aboutme")];
-          var values = (YamlScalarNode)mapping.Children[new YamlScalarNode("Values")];
-          var goals = (YamlScalarNode)mapping.Children[new YamlScalarNode("Goals")];
-          var hobbies = (YamlScalarNode)mapping.Children[new YamlScalarNode("Hobbies")];
+                var educations = (YamlSequenceNode)mapping.Children[new YamlScalarNode("Education")];
+                var projects = (YamlSequenceNode)mapping.Children[new YamlScalarNode("Projects")];
+                var resume = (YamlSequenceNode)mapping.Children[new YamlScalarNode("Resume")];
+                var jobTitle = (YamlScalarNode)mapping.Children[new YamlScalarNode("Job title")];
+                var aboutMe = (YamlScalarNode)mapping.Children[new YamlScalarNode("Aboutme")];
+                var values = (YamlScalarNode)mapping.Children[new YamlScalarNode("Values")];
+                var goals = (YamlScalarNode)mapping.Children[new YamlScalarNode("Goals")];
+                var hobbies = (YamlScalarNode)mapping.Children[new YamlScalarNode("Hobbies")];
 
-          // var projects = (YamlScalarNode)mapping.Children[new YamlScalarNode("Projects")];
-          // var resume = (YamlScalarNode)mapping.Children[new YamlScalarNode("Resume")];
+                // var projects = (YamlScalarNode)mapping.Children[new YamlScalarNode("Projects")];
+                // var resume = (YamlScalarNode)mapping.Children[new YamlScalarNode("Resume")];
 
 
-          Console.ForegroundColor = ConsoleColor.Green;
-          Console.WriteLine(skills.ToString());
-          Console.WriteLine(Environment.NewLine);
-          Console.WriteLine(jobTitle.ToString());
-          Console.WriteLine(Environment.NewLine);
-          Console.WriteLine(aboutMe.ToString());
-          Console.WriteLine(Environment.NewLine);
-          Console.WriteLine(values.ToString());
-          Console.WriteLine(Environment.NewLine);
-          Console.WriteLine(goals.ToString());
-          Console.WriteLine(Environment.NewLine);
-          Console.WriteLine(educations.ToString());
-          Console.WriteLine(Environment.NewLine);
-          Console.WriteLine(resume.ToString());
-          Console.WriteLine(Environment.NewLine);
-          Console.WriteLine(projects.ToString());
-          Console.WriteLine(Environment.NewLine);
-          Console.WriteLine(hobbies.ToString());
-          Console.WriteLine(Environment.NewLine);
-          Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(skills.ToString());
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine(jobTitle.ToString());
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine(aboutMe.ToString());
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine(values.ToString());
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine(goals.ToString());
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine(educations.ToString());
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine(resume.ToString());
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine(projects.ToString());
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine(hobbies.ToString());
+                Console.WriteLine(Environment.NewLine);
+                Console.ResetColor();
 
 			    // foreach (YamlMappingNode skill in skills){
-				  //   Console.WriteLine(
-					//     "{0}\t{1}",
-					//     skill.Children[new YamlScalarNode("language")],
-					//     skill.Children[new YamlScalarNode("descrip")]
-				  //   );
+				//     Console.WriteLine(
+				// 	    "{0}\t{1}",
+				// 	    skill.Children[new YamlScalarNode("language")],
+				// 	    skill.Children[new YamlScalarNode("descrip")]
+				//     );
 			    // }
-          // foreach (YamlMappingNode edu in educations){
-				  //   Console.WriteLine(
-					//     "{0}\t{1}",
-					//     edu.Children[new YamlScalarNode("language")],
-					//     edu.Children[new YamlScalarNode("descrip")]
-				  //   );
+                // foreach (YamlMappingNode edu in educations){
+				//     Console.WriteLine(
+				// 	    "{0}\t{1}",
+				// 	    edu.Children[new YamlScalarNode("language")],
+				// 	    edu.Children[new YamlScalarNode("descrip")]
+				//     );
 			    // }
 
 
