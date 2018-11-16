@@ -22,9 +22,11 @@ namespace Portfolio_generator_console {
             Skills:
                 - language:   C++
                   descrip:   some descriptions_1
+                  level: 99
 
                 - language:   Java
                   descrip:   some descriptions_2
+                  level: 99
 
             Projects:
                 - Project Name: test1
@@ -39,9 +41,8 @@ namespace Portfolio_generator_console {
                 city:   East Westville
                 state:  KS
 
-            About me:
+            Aboutme:
                 about meabout meabout meabout meabout meabout meabout meabout meabout meabout meabout me!!!
-
             Values:
                 Values pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
                 Purto brute disputando cu est.
@@ -53,15 +54,24 @@ namespace Portfolio_generator_console {
                 Purto brute disputando cu est.
             Resume:
                 - descrip: Resume pLorem ipsum dolor sit amet, ea doming until epicuri iudicabit nam, te usu virtute placerat.
-                Purto brute disputando cu est.
+                           Purto brute disputando cu est.
                   url: www.xiaochen.ca
             Education:
-                - descrip:
-                  
-
+                - descrip: This this demo1 description
+                  time period: March 2009 - December 2011
+                  level: Major in Engineering, University B, Los Angeles, USA.
+                - descrip: This this demo2 description
+                  time period: March 2009 - December 2011
+                  level: Major in Engineering, MIT
+                - descrip: This this demo3 description
+                  time period: March 2009 - December 2011
+                  level: Major in Engineering, Seneca College.
             
 ...";
 
+        public static string Document1 => Document;
+
+        public static string Document2 => Document;
 
         public static void SelectTemplate () {
 
@@ -177,7 +187,7 @@ namespace Portfolio_generator_console {
                 var yourName = Console.ReadLine ();
 
 
-                var input = new StringReader(Document);
+                var input = new StringReader(Document1);
 
 			    // Load the stream
 			    var yaml = new YamlStream();
@@ -193,13 +203,14 @@ namespace Portfolio_generator_console {
 
 			    // List all the items
 			    var skills = (YamlSequenceNode)mapping.Children[new YamlScalarNode("Skills")];
-                // var projects = (YamlScalarNode)mapping.Children[new YamlScalarNode("Projects")];
                 var jobTitle = (YamlScalarNode)mapping.Children[new YamlScalarNode("Job title")];
-                var aboutMe = (YamlScalarNode)mapping.Children[new YamlScalarNode("About me")];
+                var aboutMe = (YamlScalarNode)mapping.Children[new YamlScalarNode("Aboutme")];
                 var values = (YamlScalarNode)mapping.Children[new YamlScalarNode("Values")];
                 var goals = (YamlScalarNode)mapping.Children[new YamlScalarNode("Goals")];
                 var hobbies = (YamlScalarNode)mapping.Children[new YamlScalarNode("Hobbies")];
-                var Projects = (YamlScalarNode)mapping.Children[new YamlScalarNode("Projects")];
+                // var projects = (YamlScalarNode)mapping.Children[new YamlScalarNode("Projects")];
+                // var resume = (YamlScalarNode)mapping.Children[new YamlScalarNode("Resume")];
+                // var education = (YamlScalarNode)mapping.Children[new YamlScalarNode("Education")];
 
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(skills.ToString());
@@ -207,6 +218,10 @@ namespace Portfolio_generator_console {
                 Console.WriteLine(aboutMe.ToString());
                 Console.WriteLine(values.ToString());
                 Console.WriteLine(goals.ToString());
+                // Console.WriteLine(education.ToString());
+                // Console.WriteLine(resume.ToString());
+                Console.WriteLine(hobbies.ToString());
+                // Console.WriteLine(projects.ToString());
 
 
                 Console.ResetColor();
@@ -228,6 +243,7 @@ namespace Portfolio_generator_console {
                 content = content.Replace("{GOALS}",goals.ToString());
                 content = content.Replace("{HOBBIES}",hobbies.ToString());
                 content = content.Replace("{SKILLS}",skills.ToString());
+                // content = content.Replace("{EDUCATION}",education.ToString());
 
                 //Write new HTML string to file
                 File.WriteAllText (newFilePath, content);
