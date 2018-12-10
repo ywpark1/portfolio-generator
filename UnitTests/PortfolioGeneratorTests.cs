@@ -1,14 +1,12 @@
 ﻿using System;
 using Xunit;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Portfolio_generator_console;
 
 namespace UnitTests
 {
-    [TestClass]
     public class PortfolioGeneratorTests
     {
-        [TestMethod]
+        [Fact]
         public void TestDeleteFiles()
         {
             string templateDir = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "templates");
