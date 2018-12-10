@@ -1,0 +1,1 @@
+This is a temp file to test the file delete function.
