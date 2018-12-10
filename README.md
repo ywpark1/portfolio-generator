@@ -1,6 +1,6 @@
-# Portfolio Generator
+﻿# Portfolio Generator
 
-This is resume/portfolio html file generator.
+This is a resume/portfolio html file generator.
 
 ## Getting Started
 
@@ -14,6 +14,7 @@ This project is using C# and .NET Core framework with CLI tools.
 
 [Linux Prerequisites](https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x)
 
+### Installing
 To check whether the dotnet CLI is installed on your machine, run :
 
 ```bash
@@ -22,25 +23,30 @@ or
 dotnet --info
 ```
 
+For further information on dotnet CLI installation go to the following website:
+
+https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x
+
+
 ### How-To-Use
 
-Move to the root directory of this project(portfolio-generator), and run the following :
+1. Move to the root directory of this project (portfolio-generator), and run the following :
 
 ```bash
 dotnet run --project ./Portfolio-generator-console/Portfolio-generator-console.csproj
 ```
 
-The generated html file(index.html) is stored under 'portfolio' directory.
+2. The generated html file (index.html) is stored under 'portfolio' directory.
 
 Currently, 'name' can be changed in the template.
 
 **NOTE** : It is continuously updating.
 
-### Upload to Repository([USER_NAME.github.io])
+### Upload to Repository ([USER_NAME.github.io])
 
 1. Create new repository with the name 'USER_NAME.github.io'. (\*)
 
-2. Copy the repository URL(ex. https://github.com/USER_NAME/USER_NAME.github.io.git). (\*)
+2. Copy the repository URL (ex. https://github.com/USER_NAME/USER_NAME.github.io.git). (\*)
 
 3. In the Command Line, move to the root directory of this project(portfolio-generator).
 
@@ -70,3 +76,17 @@ Currently, 'name' can be changed in the template.
 - [ ] Support GUI version
 - [ ] Read Word file and get contents
 - [ ] Add more templates
+
+## Contributing
+Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+For the versions available, see the tags on this repository.
+
+## Authors
+See also the list of contributors who participated in this project.
+-Name1
+-Name2 .. 
+## Acknowledgments
+-Give credit to websites/code used online
+-Inspiration
