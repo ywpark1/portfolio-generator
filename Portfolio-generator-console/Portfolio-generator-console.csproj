@@ -6,4 +6,8 @@
     <RootNamespace>Portfolio_generator_console</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="5.2.1" />
+  </ItemGroup>
+
 </Project>
