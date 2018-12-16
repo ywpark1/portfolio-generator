@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "/Users/xiaochen/Downloads/portfolio-generator/Portfolio-generator-console/Portfolio-generator-console.csproj",
+  "TargetFramework": "netcoreapp2.1",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}

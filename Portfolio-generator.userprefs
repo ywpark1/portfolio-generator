@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{5CB6D75B-AD83-461B-8F6F-DA0246498560}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Portfolio-generator-console/HtmlGenerator.cs">
+    <Files>
+      <File FileName="Portfolio-generator-console/HtmlGenerator.cs" Line="22" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Portfolio-generator-console PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

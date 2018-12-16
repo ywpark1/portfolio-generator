@@ -1,11 +1,19 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using YamlDotNet.RepresentationModel;
+
+
 
 namespace Portfolio_generator_console {
-    public class HtmlGenerator {
 
+    public class HtmlGenerator {
         public static string templateDir = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "templates");
         public static string targetDir = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "portfolio");
+
 
         public static void SelectTemplate () {
 
@@ -112,6 +120,7 @@ namespace Portfolio_generator_console {
 
                 string templatePath = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "templates", "template1", "index.html");
                 string newFilePath = Path.Combine (Directory.GetCurrentDirectory ().ToString (), "portfolio", "index.html");
+                string _filePath = Directory.GetCurrentDirectory() + @"data.yaml";
 
                 // Read HTML from file
                 var content = File.ReadAllText (templatePath);
@@ -120,8 +129,35 @@ namespace Portfolio_generator_console {
                 Console.Write ("Please enter your name : ");
                 var yourName = Console.ReadLine ();
 
+                //// Setup the input
+                var input = new StringReader(Document);
+
+			    // Load the stream
+			    var yaml = new YamlStream();
+			    yaml.Load(input);
+
+			    // Examine the stream
+			    var mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
+
+			    foreach (var entry in mapping.Children){
+				    Console.WriteLine(((YamlScalarNode)entry.Key).Value);
+			    }
+
+			    // List all the items
+			    var items = (YamlSequenceNode)mapping.Children[new YamlScalarNode("items")];
+			    foreach (YamlMappingNode item in items){
+				    Console.WriteLine(
+					    "{0}\t{1}",
+					    item.Children[new YamlScalarNode("part_no")],
+					    item.Children[new YamlScalarNode("descrip")]
+				    );
+			    }
+
+
+
                 //Replace all values in the HTML
                 content = content.Replace ("{YOUR_NAME}", yourName);
+                content = content.Replace ("items",item.Children[new YamlScalarNode("descrip").ToString);
 
                 //Write new HTML string to file
                 File.WriteAllText (newFilePath, content);

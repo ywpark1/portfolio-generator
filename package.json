@@ -1,0 +1,30 @@
+{
+  "name": "portfolio-generator",
+  "version": "1.0.0",
+  "description": "This is resume/portfolio html file generator.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --write \"./**/*.{js,json,md,css,yaml,yml}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xwang345/portfolio-generator.git"
+  },
+  "dependencies": {
+    "prettier": "^1.15.2",
+    "pretty-quick": "^1.8.0",
+    "husky": "^1.1.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xwang345/portfolio-generator/issues"
+  },
+  "homepage": "https://github.com/xwang345/portfolio-generator#readme"
+}
+}
